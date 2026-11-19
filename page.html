@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>酒店预订控制台 · 流程演示</title>
+  <style>/*__CSS__*/</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="identity"><span class="logo" aria-hidden="true"><i></i></span><div><strong>酒店预订控制台</strong><small>HOTEL BOOKING CONSOLE</small></div></div>
+    <ol class="steps" aria-label="搜索流程">
+      <li data-step="1"><span>1</span>选择日期</li><li data-step="2"><span>2</span>地图选点</li><li data-step="3"><span>3</span>选择酒店</li>
+    </ol>
+    <span class="environment"><i></i>模拟数据</span>
+  </header>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="side-title">工作台</div><div class="side-active"><i></i>酒店搜索</div>
+      <div class="side-section"><span>当前市场</span><strong>北京</strong><small>人民币 · CNY</small></div>
+    </aside>
+    <main class="main">
+      <div class="page-head"><div><h1>搜索酒店</h1><p>选择入住日期，并在地图上确认搜索范围。</p></div><span id="summary" class="page-summary"></span></div>
+      <section class="search panel" aria-label="搜索条件">
+        <div class="field date-field"><label>入住 / 离店日期</label><button class="date-trigger" id="dateOpen"><span><small>入住</small><strong id="checkInLabel"></strong></span><span id="nightCount" class="night-tag"></span><span><small>离店</small><strong id="checkOutLabel"></strong></span></button></div>
+        <div class="field location-field"><label>搜索位置</label><button class="location-trigger" id="mapLocation"><span><i class="pin"></i><strong id="locationLabel"></strong></span><small id="locationRadius"></small></button></div>
+        <div class="field guests"><label for="guests">入住人数</label><select id="guests"><option value="1">1 位成人</option><option value="2" selected>2 位成人</option><option value="3">3 位成人</option><option value="4">4 位成人</option></select></div>
+        <button id="mapOpen" class="primary search-action"><i class="pin"></i>地图选点</button>
+      </section>
+      <div class="results">
+        <section class="panel result-panel" aria-labelledby="resultsHeading">
+          <div class="panel-head"><div><h2 id="resultsHeading">搜索结果</h2><p id="resultsText" aria-live="polite"></p></div><select id="sort" aria-label="排序"><option value="distance">距离优先</option><option value="price">价格优先</option><option value="rating">评分优先</option></select></div>
+          <div class="table-head"><span>酒店</span><span>距离</span><span>每晚起价</span></div>
+          <div id="hotels" class="hotel-list"></div>
+        </section>
+        <section class="panel rate-panel" aria-labelledby="ratesHeading">
+          <div class="panel-head"><div><h2 id="ratesHeading">价格方案</h2><p id="rateContext"></p></div><span class="light-tag">CNY</span></div>
+          <div id="hotelDetails"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="calendar" class="calendar" aria-labelledby="calendarTitle">
+    <div class="dialog-head"><div><h2 id="calendarTitle">选择入住和离店日期</h2><p id="calendarHint"></p></div><button class="icon-close" id="dateClose" aria-label="关闭日期选择">×</button></div>
+    <div class="calendar-body"><button class="month-control month-prev" id="previousMonth" aria-label="上一个月">‹</button><div class="months" id="months"></div><button class="month-control month-next" id="nextMonth" aria-label="下一个月">›</button></div>
+    <div class="dialog-foot"><strong id="dateRange"></strong><button class="primary" id="dateConfirm">确认日期</button></div>
+  </dialog>
+
+  <dialog id="placePicker" class="place-picker" aria-labelledby="mapTitle">
+    <div class="dialog-head"><div><h2 id="mapTitle">在地图上选择搜索位置</h2><p>点击地图设定中心点，按范围查找附近酒店。</p></div><button class="icon-close" id="mapClose" aria-label="关闭地图">×</button></div>
+    <div class="picker-body">
+      <div class="map-frame"><div id="map" aria-label="北京酒店选点地图"></div><div class="map-zoom"><button id="zoomIn" aria-label="放大">+</button><button id="zoomOut" aria-label="缩小">−</button></div><a class="attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a></div>
+      <div class="picker-detail">
+        <p class="section-label">搜索中心</p><h3 id="pendingPlace"></h3><p id="pendingCoordinates" class="coordinates"></p>
+        <div class="picker-radius"><label for="radius">搜索半径</label><select id="radius"><option value="1.5">1.5 公里</option><option value="2" selected>2 公里</option><option value="3">3 公里</option></select></div>
+        <p class="section-label">常用位置</p><div id="presets" class="presets"></div>
+        <div class="match-count"><strong id="pendingCount"></strong><span>家模拟酒店在范围内</span></div>
+        <p id="mapError" role="status" hidden></p>
+      </div>
+    </div>
+    <div class="dialog-foot"><span id="mapSummary"></span><button class="primary" id="mapConfirm">确认位置并搜索</button></div>
+  </dialog>
+  <script>/*__MAPLIBRE__*/</script>
+  <script>/*__BASE__*/</script>
+  <script>/*__MARKERS__*/</script>
+  <script>/*__APP__*/</script>
+</body>
+</html>
